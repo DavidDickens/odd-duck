@@ -3,6 +3,18 @@
 const state = [];
 let roundsOfVoting = 25;
 
+let trackerEl = document.getElementById('votingTracker');
+/* let containerEl = document.getElementById('productImages'); */
+let imgEls = document.querySelectorAll('#productImages .container img');
+let pEls = document.querySelectorAll('#productImages .container p');
+
+let showResultsBtn = document.getElementById('showResultBtn');
+showResultsBtn.style.display = 'none';
+
+let resultsTable = document.getElementById('resultsContainer');
+
+
+
 function Image(name, source) {
   this.name = name;
   this.timesClicked = 0;
@@ -30,81 +42,98 @@ state.push(new Image('unicorn', 'img/unicorn.jpg'));
 state.push(new Image('water can', 'img/water-can.jpg'));
 state.push(new Image('wine glass', 'img/wine-glass.jpg'));
 
-let imgEls = document.querySelectorAll('img'); //array like thing filled with all the img elements in my html
-let voteTrackerEl = document.getElementById('vote-tracker'); 
-
 console.log("CURRENTLY RENDERED IMAGES", imgEls);
 
 console.log('CURRENT STATE', state);
 
-
 renderImages();
 
-function generateRandomImage() {
+function randomNum() {
   return Math.floor(Math.random() * state.length);
 }
 
 function renderImages() {
-  // find some images from state
-  let image1 = state[generateRandomImage()];
-  let image2 = state[generateRandomImage()];
-  let image3 = state[generateRandomImage()];
-  console.log('IMAGES to re-render', imgEls, image1, image2, image3);
-  while (image1.name === image2.name){
-    image2 = state[generateRandomImage()];
+
+  let product1 = state[randomNum()];
+  let product2 = state[randomNum()];
+  let product3 = state[randomNum()];
+
+  if (product1.name === product2.name || product1.name === product3.name) {
+    product1 = state[randomNum()]
+  } else if (product2.name === product1.name || product2.name === product3.name) {
+    product2 = state[randomNum()]
+  } else if (product3.name === product1.name || product3.name === product2.name) {
+    product3 = state[randomNum()]
   }
-  // this should garuantee fresh goats
-  imgEls[0].src = image1.source; // this makes things render
-  imgEls[0].id = image1.name;
-  image1.timesShown += 1;
-  imgEls[1].src = image2.source;
-  imgEls[1].id = image2.name;
-  image2.timesShown += 1;
-  imgEls[2].src = image3.source; 
-  imgEls[2].id = image3.name;
-  image3.timesShown += 1;
+
+  imgEls[0].src = product1.source;
+  imgEls[0].id = product1.name;
+  product1.timesShown += 1;
+
+
+  imgEls[1].src = product2.source;
+  imgEls[1].id = product2.name;
+  product2.timesShown += 1;
+
+  imgEls[2].src = product3.source;
+  imgEls[2].id = product3.name;
+  product3.timesShown += 1;
+
+  pEls[0].textContent = `${product1.name}`;
+  pEls[1].textContent = `${product2.name}`;
+  pEls[2].textContent = `${product3.name}`;
+
 }
 
-function handleImageClick(event) {
-  console.log(event.target); // event.target always represents the exact element where an event occurred.
 
-  // identify which image was clicked on??
-  let imageThatWasClicked = event.target.id;
-  state.forEach(image => {
-    if (image.name === imageThatWasClicked) {
-      image.timesClicked += 1; // mutation of an object
+function handleClick(event) {
+  let productClicked = event.target.id;
+
+  state.forEach(img => {
+    if (img.name === productClicked) {
+      img.timesClicked += 1;
     }
   });
-  console.log('UPDATED STATE', state);
 
-  // re-render new goat images -> random goat image from state
-  if (roundsOfVoting) {
+  if (roundsOfVoting - 1) {
     renderImages();
     roundsOfVoting--;
+
   } else {
-    voteTrackerEl.removeEventListener('click', handleImageClick);
+    trackerEl.removeEventListener('click', handleClick);
+    trackerEl.style.display = 'none';
+    showResultsBtn.style.display = 'block';
   }
 }
 
-voteTrackerEl.addEventListener('click', handleImageClick);
+trackerEl.addEventListener('click', handleClick)
 
-// let eventId = voteTrackerEl.addEventListener('click', function(event) {
-//   console.log(event.target); // event.target always represents the exact element where an event occurred.
 
-//   // identify which image was clicked on??
-//   let goatThatWasClicked = event.target.id;
-//   state.forEach(image => {
-//     if (image.name === goatThatWasClicked) {
-//       image.timesClicked += 1; // mutation of an object
-//     }
-//   });
-//   console.log('UPDATED STATE', state);
 
-//   // re-render new goat images -> random goat image from state
-//   if (roundsOfVoting) {
-//     renderGoats();
-//     roundsOfVoting--;
-//   } else {
-//     voteTrackerEl.removeEventListener('click', eventId);
-//   }
-// });
+function displayResults() {
+
+  resultsTable.style.display = 'block';
+
+  let tbody = document.createElement('tbody');
+  resultsTable.appendChild(tbody);
+
+
+  resultsTable.appendChild
+  state.forEach(item => {
+    console.log(item.name, item.timesClicked, item.timesShown, item.source);
+    // containerEl.innerHTML ='';
+    let trow = document.createElement('tr');
+    tbody.appendChild(trow);
+    trow.innerHTML = `
+    <td><img src="${item.source}"/></td>
+    <td>${item.name}</td>
+    <td>${item.timesClicked}</td>
+    <td>${item.timesShown}</td>
+    `;
+    tbody.appendChild(trow);
+  });
+
+
+}
+
+showResultsBtn.addEventListener('click', displayResults);

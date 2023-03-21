@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odd Duck</title>
   <link rel="stylesheet" href="css/style.css">
-  <title>Odd Duck!</title>
-</head>
 
+</head>
 <body>
+  <link id="backbround" href="https://images.unsplash.com/photo-1582845512747-e42001c95638?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" rel="stylesheet" type="text/css">
   <header>
-    <h1>Put something here</h1>
     <nav>
+    <h1>Odd Duck</h1>
+
       <ul>
-        <li>Link 1</li>
-        <li>Link 2</li>
-        <li>Link 3</li>
-        <li>Link 4</li>
+        <li><a href="#">Link</a></li>
       </ul>
     </nav>
   </header>
+
   <main>
-    <section id="vote-tracker">
+    <section id="votingTracker">
+      <h2>Select Your Favorite Product</h2>
+      <div id="productImages">
+
+        <div class="container">
+          <p class="productName"></p>
+          <img>
+        </div>
+        <div class="container">
+          <p class="productName"></p>
+          <img>
+        </div>
+        <div class="container">
+          <p class="productName"></p>
+          <img>
+        </div>
+      </div>
     </section>
-      <section class="row" id="images">
-        <div class="column">
-          <img>
-        </div>
-        <div class="column">
-          <img>
-        </div>
-        <div class="column">
-          <img>
-        </div>
-      </section>
-    <section id="results"></section>
+
+
+    <section id="results">
+      <button id="showResultBtn">Show Results</button>
+      <table id="resultsContainer">
+        <thead>
+          <tr>
+           <!--  number of coulmns the cell should span -->
+            <th colspan="2">Item</th>
+            <th>Times Clicked</th>
+            <th>Times Shown</th>
+          </tr>
+        </thead>
+      </table>
+    </section>
   </main>
-  <script src="js/app.js"></script>
+
+  <footer>
+    <p>&copy; | <a href="">put sommething here</a></p>
+    <script src="js/app.js"></script>
+  </footer>
 </body>
+
 
 </html>
