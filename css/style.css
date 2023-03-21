@@ -1,0 +1,42 @@
+@media print{@page {size: landscape}}
+
+#vote-tracker {
+  border: thin solid red;
+}
+
+h1 {
+  text-align: center;
+}
+
+#vote-tracker {
+  display: grid;
+  width: 500px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 200px;
+}
+
+img {
+  height: 100%;
+  margin: 0 20px;
+} 
+
+.column {
+ flex: 33.33%;
+  padding: 5px;
+  
+}
+
+.row {
+ display: flex;
+ margin-left: 0%;
+ border: thin solid blue
+ 
+}
+
+body {
+  
+}
+
+header {
+  
+}
