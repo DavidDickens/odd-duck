@@ -6,21 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odd Duck</title>
   <link rel="stylesheet" href="css/style.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <link id="backbround" href="https://images.unsplash.com/photo-1582845512747-e42001c95638?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" rel="stylesheet" type="text/css">
   <header>
     <nav>
-    <h1>Odd Duck</h1>
-
-      <ul>
-        <li><a href="#">Link</a></li>
-      </ul>
+    <h1>Odd Duck</h1>     
     </nav>
   </header>
 
   <main>
+    
     <section id="votingTracker">
       <h2>Select Your Favorite Product</h2>
       <div id="productImages">
@@ -39,9 +36,8 @@
         </div>
       </div>
     </section>
-
-
     <section id="results">
+      <canvas id="draw-on-me" width="300" height="300"></canvas>
       <button id="showResultBtn">Show Results</button>
       <table id="resultsContainer">
         <thead>
@@ -57,7 +53,7 @@
   </main>
 
   <footer>
-    <p>&copy; | <a href="">put sommething here</a></p>
+    <p>&copy; 
     <script src="js/app.js"></script>
   </footer>
 </body>

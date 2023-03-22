@@ -2,6 +2,7 @@
 
 const state = [];
 let roundsOfVoting = 25;
+let chartObj = null;
 
 let trackerEl = document.getElementById('votingTracker');
 /* let containerEl = document.getElementById('productImages'); */
@@ -137,3 +138,56 @@ function displayResults() {
 }
 
 showResultsBtn.addEventListener('click', displayResults);
+
+const canvasEl = document.getElementById('chart');
+
+function drawChart() {
+  let labels = [];
+  let timesShownValues = [];
+  let timesClickedValues = [];
+  // look at all object inside of state
+  state.forEach(product => {
+    // labels??
+    labels.push(product.name);
+    // dataset values??
+    timesShownValues.push(product.timesShown);
+    timesClickedValues.push(product.timesClicked);
+  });
+
+
+  return new Chart(canvasEl, {
+    type: 'bar',
+    data: {
+      labels: labels, // how can we get the names of our goats??
+      datasets: [{
+        label: 'Times Shown',
+        data: timesShownValues, // where does this data live?
+        borderWidth: 1
+      }, {
+        label: 'Times Clicked',
+        data: timesClickedValues, // where does this data live?
+        borderWidth: 1
+      }], // do we have more than 1 dataset?
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+let buttonEl = document.getElementById('update-chart');
+buttonEl.addEventListener('click', function () {
+  updateChart([1, 2, 3, 4,5, 6, 7, 8, 9]);
+});
+ 
+
+function updateChart(data) {
+  console.log("Chart up to date?", chartObj.data);
+  chartObj.data.datasets[0].data = data;
+  chartObj.update();
+}
+// put inside render data function
