@@ -149,6 +149,7 @@ footer {
 
 #resultsContainer{
     display: none;
+    border: solid thick cadetblue;;
 }
 
 td:first-child{
@@ -158,6 +159,6 @@ td:first-child{
 
 }
 
-#draw-On-Me{
+/* #draw-On-Me{
   border: solid thin red;
-}
+} */
